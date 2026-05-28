@@ -1,6 +1,6 @@
 {
   "logging": {
-    "fileName": "/var/log/cloudquery.log",
+    "fileName": "~/.local/state/cloudquery/cloudquery.log",
     "maxSize": 20,
     "maxBackups": 1,
     "maxAge": 30

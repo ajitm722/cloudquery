@@ -11,6 +11,7 @@ package utilities
 
 import (
 	"os"
+	"path/filepath"
 	"sync"
 
 	log "github.com/sirupsen/logrus"
@@ -52,6 +53,10 @@ func CreateLogger(isDebug bool, maxSize int, maxBackups int, maxAge int, fileNam
 
 func createLogger(isDebug bool, maxSize int, maxBackups int, maxAge int, logFile string) *log.Logger {
 	newInstance := log.New()
+	// Create log directory if missing (XDG_DATA_HOME convention, e.g. ~/.local/state/cloudquery/)
+	if dir := filepath.Dir(logFile); dir != "" {
+		os.MkdirAll(dir, 0755)
+	}
 	rotateLogger := &lumberjack.Logger{
 		Filename:   logFile,
 		MaxSize:    maxSize, // megabytes

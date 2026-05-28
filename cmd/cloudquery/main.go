@@ -12,7 +12,6 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"github.com/Uptycs/cloudquery/utilities"
 	"log"
 	"os"
@@ -55,7 +54,13 @@ func main() {
 		log.Fatalf("Error creating extension: %s\n", err)
 	}
 
-	extension.ReadExtensionConfigurations(homeDirectory+string(os.PathSeparator)+"config"+string(os.PathSeparator)+"extension_config.json", *verbose)
+	// Eager-init logger so log calls work even if extension_config.json is missing or malformed.
+	utilities.CreateLogger(*verbose, 0, 0, 0)
+	err = extension.ReadExtensionConfigurations(homeDirectory+string(os.PathSeparator)+"config"+string(os.PathSeparator)+"extension_config.json", *verbose)
+	if err != nil {
+		// Don't crash — the extension can still run with default (no-op) credentials.
+		log.Printf("failed to read extension config: %v (continuing with defaults)\n", err)
+	}
 	extension.ReadTableConfigurations(homeDirectory)
 	extension.RegisterPlugins(server)
 
@@ -70,10 +75,12 @@ func main() {
 	// kill -9 is syscall.SIGKILL but can't be catch, so don't need add it
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
-	// Start server
+	// Start server — graceful shutdown instead of panic on failure
 	go func() {
 		if err := server.Run(); err != nil {
-			panic(fmt.Sprintf("Failed to start extension manager server: %s", err))
+			utilities.GetLogger().Errorf("Failed to start extension manager server: %s", err)
+			syscall.Kill(syscall.Getpid(), syscall.SIGINT)
+			return
 		}
 		syscall.Kill(syscall.Getpid(), syscall.SIGINT)
 	}()
