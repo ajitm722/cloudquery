@@ -53,7 +53,7 @@ func CreateLogger(isDebug bool, maxSize int, maxBackups int, maxAge int, fileNam
 
 func createLogger(isDebug bool, maxSize int, maxBackups int, maxAge int, logFile string) *log.Logger {
 	newInstance := log.New()
-	// Create log directory if missing (XDG_DATA_HOME convention, e.g. ~/.local/state/cloudquery/)
+	logFile = ExpandPath(logFile)
 	if dir := filepath.Dir(logFile); dir != "" {
 		os.MkdirAll(dir, 0755)
 	}

@@ -70,6 +70,17 @@ func ReadExtensionConfigurations(filePath string, verbose bool) error {
 	}
 	utilities.ExtConfiguration = extConfig
 
+	utilities.ExtConfiguration.ExtConfLog.FileName = utilities.ExpandPath(utilities.ExtConfiguration.ExtConfLog.FileName)
+	for idx := range utilities.ExtConfiguration.ExtConfAws.Accounts {
+		utilities.ExtConfiguration.ExtConfAws.Accounts[idx].CredentialFile = utilities.ExpandPath(utilities.ExtConfiguration.ExtConfAws.Accounts[idx].CredentialFile)
+	}
+	for idx := range utilities.ExtConfiguration.ExtConfGcp.Accounts {
+		utilities.ExtConfiguration.ExtConfGcp.Accounts[idx].KeyFile = utilities.ExpandPath(utilities.ExtConfiguration.ExtConfGcp.Accounts[idx].KeyFile)
+	}
+	for idx := range utilities.ExtConfiguration.ExtConfAzure.Accounts {
+		utilities.ExtConfiguration.ExtConfAzure.Accounts[idx].AuthFile = utilities.ExpandPath(utilities.ExtConfiguration.ExtConfAzure.Accounts[idx].AuthFile)
+	}
+
 	// Log config is read. Init the logger now.
 	InitializeLogger(verbose)
 
