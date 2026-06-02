@@ -1,0 +1,134 @@
+{
+  "aws_bedrock_agent": {
+    "aws": {
+      "regionCodeAttribute": "region_code",
+      "accountIdAttribute": "account_id"
+    },
+    "gcp": {},
+    "azure": {},
+    "parsedAttributes": [
+      {
+        "sourceName": "AgentSummaries_AgentId",
+        "targetName": "agent_id",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "AgentSummaries_AgentName",
+        "targetName": "agent_name",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "AgentSummaries_AgentArn",
+        "targetName": "agent_arn",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "AgentSummaries_AgentStatus",
+        "targetName": "agent_status",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "AgentSummaries_Description",
+        "targetName": "description",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "AgentSummaries_LatestAgentVersion",
+        "targetName": "latest_agent_version",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "AgentSummaries_UpdatedAt",
+        "targetName": "updated_at",
+        "targetType": "TEXT",
+        "enabled": true
+      }
+    ]
+  },
+  "aws_bedrock_knowledge_base": {
+    "aws": {
+      "regionCodeAttribute": "region_code",
+      "accountIdAttribute": "account_id"
+    },
+    "gcp": {},
+    "azure": {},
+    "parsedAttributes": [
+      {
+        "sourceName": "KnowledgeBaseSummaries_KnowledgeBaseId",
+        "targetName": "knowledge_base_id",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "KnowledgeBaseSummaries_Name",
+        "targetName": "name",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "KnowledgeBaseSummaries_Description",
+        "targetName": "description",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "KnowledgeBaseSummaries_Status",
+        "targetName": "status",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "KnowledgeBaseSummaries_UpdatedAt",
+        "targetName": "updated_at",
+        "targetType": "TEXT",
+        "enabled": true
+      }
+    ]
+  },
+  "aws_bedrock_agent_action_group": {
+    "aws": {
+      "regionCodeAttribute": "region_code",
+      "accountIdAttribute": "account_id"
+    },
+    "gcp": {},
+    "azure": {},
+    "parsedAttributes": [
+      {
+        "sourceName": "ActionGroupSummaries_ActionGroupId",
+        "targetName": "action_group_id",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "ActionGroupSummaries_ActionGroupName",
+        "targetName": "name",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "ActionGroupSummaries_ActionGroupState",
+        "targetName": "state",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "ActionGroupSummaries_Description",
+        "targetName": "description",
+        "targetType": "TEXT",
+        "enabled": true
+      },
+      {
+        "sourceName": "ActionGroupSummaries_UpdatedAt",
+        "targetName": "updated_at",
+        "targetType": "TEXT",
+        "enabled": true
+      }
+    ]
+  }
+}

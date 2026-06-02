@@ -1,0 +1,3 @@
+- aws_bedrock_agent
+- aws_bedrock_knowledge_base
+- aws_bedrock_agent_action_group

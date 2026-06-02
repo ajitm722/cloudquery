@@ -17,6 +17,7 @@ import (
 	"github.com/Uptycs/basequery-go/plugin/table"
 	"github.com/Uptycs/cloudquery/extension/aws/acm"
 	"github.com/Uptycs/cloudquery/extension/aws/apigateway"
+	"github.com/Uptycs/cloudquery/extension/aws/bedrock"
 	"github.com/Uptycs/cloudquery/extension/aws/cloudformation"
 	"github.com/Uptycs/cloudquery/extension/aws/cloudtrail"
 	"github.com/Uptycs/cloudquery/extension/aws/cloudwatch"
@@ -103,6 +104,7 @@ func ReadTableConfigurations(homeDir string) {
 		"aws/elbv2/table_config.json",
 		"aws/cloudtrail/table_config.json",
 		"aws/rds/table_config.json",
+		"aws/bedrock/table_config.json",
 	}
 
 	var gcpConfigFileList = []string{
@@ -250,6 +252,10 @@ func RegisterPlugins(server *osquery.ExtensionManagerServer) {
 	server.RegisterPlugin(table.NewPlugin("aws_sns_topic", sns.ListTopicsColumns(), sns.ListTopicsGenerate))
 	server.RegisterPlugin(table.NewPlugin("aws_sqs_queue", sqs.ListQueuesColumns(), sqs.ListQueuesGenerate))
 	server.RegisterPlugin(table.NewPlugin("aws_cloudtrail_trail", cloudtrail.DescribeTrailsColumns(), cloudtrail.DescribeTrailsGenerate))
+	// AWS Bedrock
+	server.RegisterPlugin(table.NewPlugin("aws_bedrock_agent", bedrock.ListAgentsColumns(), bedrock.ListAgentsGenerate))
+	server.RegisterPlugin(table.NewPlugin("aws_bedrock_knowledge_base", bedrock.ListKnowledgeBasesColumns(), bedrock.ListKnowledgeBasesGenerate))
+	server.RegisterPlugin(table.NewPlugin("aws_bedrock_agent_action_group", bedrock.ListAgentActionGroupsColumns(), bedrock.ListAgentActionGroupsGenerate))
 	// GCP Compute
 	server.RegisterPlugin(table.NewPlugin("gcp_compute_instance", gcpComputeHandler.GcpComputeInstancesColumns(), gcpComputeHandler.GcpComputeInstancesGenerate))
 	server.RegisterPlugin(table.NewPlugin("gcp_compute_network", gcpComputeHandler.GcpComputeNetworksColumns(), gcpComputeHandler.GcpComputeNetworksGenerate))
